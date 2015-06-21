@@ -1,0 +1,48 @@
+---
+title: "Machine Learning Excercise."
+author: "Aaron Nematnejad"
+date: "Sunday, June 21, 2015"
+output: html_document
+---
+
+subset the data by getting rid of appropriate columns. 
+Attach final file to the github repository. 
+
+
+```{r}
+library(caret)
+setwd("C:/Users/aaron/Desktop/Coursera/Machine")
+nike=read.csv("pml-training.csv")
+
+
+#nike=nike[1:4000,]
+#This just read in the training spreadsheet 
+
+str(nike)
+dim(nike)
+table(nike$classe)
+nike=nike[,c("magnet_dumbbell_z","yaw_forearm","magnet_forearm_z","classe")]
+
+```
+
+
+```{r}
+
+#Lets start with rpart
+
+
+# Lets test out by just doing a tree with 3 variables as the explanotary. 
+
+modfit=train(classe~.,method="rpart", data=nike)
+modfit
+
+#Lets see what ahppens if I do modfit$finalModel
+modfit$finalModel
+plot(modfit$final,uniform=TRUE,main="Classification Tree")
+text(modfit$finalModel, use.n=TRUE, all=TRUE, cex=0.8)
+#fancier plots 
+library(rattle)
+fancyRpartPlot(modfit$finalModel)
+
+```
+
