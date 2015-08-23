@@ -26,7 +26,7 @@ table(nike$classe)
 
 nike=createDataPartition(nike$classe, p=0.70, list=FALSE)
 
-#After performingh the preprocessings and testing using principal component analysis, I decided that 3 columns had the #most significance. Other columns helped with the accuracy but at a much greater computational cost. 
+#After performingh the preprocessings and testing using principal component analysis, I decided that 3 columns had the #most significance. Other columns helped with the accuracy but at a much greater computational cost. Also used cross validation and estimated out of sample error. 
 
 #choosing only 3 columns 
 nike=nike[,c("magnet_dumbbell_z","yaw_forearm","magnet_forearm_z","classe")]
