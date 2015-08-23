@@ -21,6 +21,14 @@ nike=read.csv("pml-training.csv")
 str(nike)
 dim(nike)
 table(nike$classe)
+
+#What needs to be done now slice the data using 70% for the trauining set and 30% for the test set. 
+
+nike=createDataPartition(nike$classe, p=0.70, list=FALSE)
+
+#After performingh the preprocessings and testing using principal component analysis, I decided that 3 columns had the #most significance. Other columns helped with the accuracy but at a much greater computational cost. 
+
+#choosing only 3 columns 
 nike=nike[,c("magnet_dumbbell_z","yaw_forearm","magnet_forearm_z","classe")]
 
 ```
@@ -28,10 +36,10 @@ nike=nike[,c("magnet_dumbbell_z","yaw_forearm","magnet_forearm_z","classe")]
 
 ```{r}
 
-#Lets start with rpart
+#To demonstrate output lets start with rpart
 
 
-# Lets test out by just doing a tree with 3 variables as the explanotary. 
+ 
 
 modfit=train(classe~.,method="rpart", data=nike)
 modfit
